@@ -1,4 +1,4 @@
-# SPAwards | Award parameters can be configured directly through the phpVMS admin panel
+# SPAwards | phpVMS v7 awards for a variety achievements
 
 * Upload spawards_config.php to modules/Awards/spawards_config.php
 * Upload all other SPAwards files to modules/Awards/Awards
@@ -7,79 +7,79 @@
 
 ## Below is a list of all available award modules included in SPAwards. Each award can be configured individually through the phpVMS admin panel with specific parameters (for example: distance, time, count, or thresholds).
 
-01. Aircraft
+1. Aircraft<br>
 Rewards pilots who have completed a set number of flights using aircraft from the same family (for example, A320 or B737 series).
 
-02. Airline
+3. Airline<br>
 Given to pilots who have flown a specific number of flights with one airline, showing loyalty to that carrier.
 
-03. Cargo
+4. Cargo<br>
 Awarded to pilots who have transported a significant amount of cargo over their career, showcasing their freight experience.
 
-04. Consecutive
+5. Consecutive<br>
 Recognizes pilots who have filed flights on a series of consecutive days without interruption.
 
-05. Discord
+6. Discord<br>
 Grants the award to pilots verified as active members of the VAs official Discord server.
 
-06. Distance
+7. Distance<br>
 Awarded to pilots who have flown a total cumulative distance exceeding a defined number of nautical miles.
 
-07. Explorer
+8. Explorer<br>
 Given to pilots who have operated flights across multiple ICAO regions, proving their global flying experience.
 
-08. Fleet
+9. Fleet<br>
 Rewards pilots who have flown with a wide range of aircraft types in the VAs fleet.
 
-09. Ivao
+10. Ivao<br>
 Awarded to pilots with a minimum number of flight minutes logged on the IVAO network.
 
-10. Vatsim
+11. Vatsim<br>
 Awarded to pilots with a minimum number of flight minutes logged on the VATSIM network.
 
-11. Networkelite
+12. Networkelite<br>
 Given to pilots who are active on multiple online networks such as IVAO and VATSIM.
 
-12. Landingrate
+13. Landingrate<br>
 Rewards pilots who achieve a landing rate within a defined precision range (for example, between -145 and -155 fpm).
 
-13. Longhaul
+14. Longhaul<br>
 Awarded to pilots who have completed several long-haul flights exceeding a specific minimum distance.
 
-14. Loyalty
+15. Loyalty<br>
 Recognizes pilots who primarily fly from or to the same base hub, demonstrating hub loyalty.
 
-15. Membership
+16. Membership<br>
 Given to pilots who have reached a defined number of membership years since joining the VA.
 
-16. Money
+17. Money<br>
 Awarded to pilots who have earned a certain amount of virtual money through flight operations.
 
-17. Nightowl
+18. Nightowl<br>
 Rewards pilots who have performed multiple night flights, landing between 22:00 and 06:00 UTC.
 
-18. Passenger
+19. Passenger<br>
 Awarded to pilots who have transported a high total number of passengers across all accepted flights.
 
-19. Performer
+20. Performer<br>
 Recognizes pilots with a high number of accepted flights and consistent flight activity.
 
-20. RouteCode
+21. RouteCode<br>
 Given to pilots who have completed a flight using a specific route code defined by the VA.
 
-21. ShortHaul
+22. ShortHaul<br>
 Awarded to pilots who have completed a set number of short-haul flights below a specified distance.
 
-22. Streak
+23. Streak<br>
 Rewards pilots who have achieved a continuous streak of successful (accepted) flights without rejection.
 
-23. Weekend
+24. Weekend<br>
 Given to pilots who frequently fly during weekends, showing regular weekend activity.
 
-24. Earlybird
+25. Earlybird<br>
 Awarded to pilots who fly multiple early morning flights between 04:00 and 08:00 UTC.
 
-25. Fuelburner
+26. Fuelburner<br>
 Rewards pilots who have performed at least one flight consuming more than a specified amount of fuel (for example, over 60,000 kg).
 
 ## Debug examples:
@@ -126,4 +126,5 @@ Please use the GitHub [issue](https://github.com/PaintSplasher/phpvms7_SPAwards/
 ## Release / Update Notes
 
 15.OCTOBER.25
+
 * Initial Release
