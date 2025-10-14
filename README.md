@@ -84,33 +84,33 @@ Rewards pilots who have performed at least one flight consuming more than a spec
 
 ## Debug examples:
 
-* SPAwards(RouteCode)RouteCode) | Pilot (ID: 1) has flown PF, ABC needed.  
-* SPAwards(RouteCode)Distance) | Pilot (ID: 1) has 255 days, 31 days needed.  
-* SPAwards(RouteCode)VATSIM) | Pilot (ID: 1) has 17781.6 minutes on VATSIM, 120 needed.  
-* SPAwards(RouteCode)IVAO) | Pilot (ID: 1) has 875.1 minutes on IVAO, 120 needed.  
-* SPAwards(RouteCode)Money) | Pilot (ID: 1) has 189.69, 150 needed.  
-* SPAwards(RouteCode)Landingrate) | Pilot (ID: 1) has 0 fpm, between -155 to -145 fpm needed.  
-* SPAwards(RouteCode)Airline) | Pilot (ID: 1) has 4 flights with DVA, 3 needed.  
-* SPAwards(RouteCode)Distance) | Pilot (ID: 1) has flown 2583.74 nm, 2500 nm needed.  
-* SPAwards(RouteCode)Aircraft) | Pilot (ID: 1) has 2 flights with aircraft AT75, 2 needed.  
-* SPAwards(RouteCode)Streak) | Pilot (ID: 1) streak check: FAILED  
-* SPAwards(RouteCode)Shorthaul) | Pilot (ID: 1) has 1 short-haul flights < 250 nm, 10 required.  
-* SPAwards(RouteCode)Longhaul) | Pilot (ID: 1) has 0 flights > 4200 nm, 10 required.  
-* SPAwards(RouteCode)Consecutive) | Pilot (ID: 1) 2 active days, 5 required.  
-* SPAwards(RouteCode)Loyalty) | Pilot (ID: 1) has 3 flights from/to EFHK, 2 required.  
-* SPAwards(RouteCode)Explorer) | Pilot (ID: 1) has 3 flights in region EF, 2 required.  
-* SPAwards(RouteCode)Fleet) | Pilot (ID: 1) has flown 3 unique aircraft types, 2 required.  
-* SPAwards(RouteCode)Performer) | Pilot (ID: 1) average score: 89.0000,  80 required.  
-* SPAwards(RouteCode)Networkelite) | VATSIM: 17781.6 minutes for Pilot (ID: 1).  
-* SPAwards(RouteCode)Networkelite) | IVAO: 875.1 minutes for Pilot (ID: 1).  
-* SPAwards(RouteCode)Networkelite) | Pilot (ID: 1) total combined minutes: 18656.7, required: 3000.  
-* SPAwards(RouteCode)Nightler) | Pilot (ID: 1) has 0 night landings, 3 required.  
-* SPAwards(RouteCode)Cargo) | Pilot (ID: 1) carried 786 cargo units with DVA/AT75, 500000 required.  
-* SPAwards(RouteCode)Passenger) | Pilot (ID: 1) carried 110 pax with DVA/A319, 100 required.  
-* SPAwards(RouteCode)Weekend) | Pilot (ID: 1) has 0 weekend flights, 5 required.  
-* SPAwards(RouteCode)Discord) | Pilot (ID: 1) 000000000000000 verified successfully with required role 000000000000000.  
-* SPAwards(RouteCode)Earlybird) | Pilot (ID: 1) has 0 early flights, 5 required.  
-* SPAwards(RouteCode)Fuelburner) | Pilot (ID: 1) has no flights exceeding 50000 kg fuel used. 
+* SPAwards(RouteCode)) | Pilot (ID: 1) has flown PF, ABC needed.  
+* SPAwards(Distance)) | Pilot (ID: 1) has 255 days, 31 days needed.  
+* SPAwards(VATSIM)) | Pilot (ID: 1) has 17781.6 minutes on VATSIM, 120 needed.  
+* SPAwards(IVAO)) | Pilot (ID: 1) has 875.1 minutes on IVAO, 120 needed.  
+* SPAwards(Money)) | Pilot (ID: 1) has 189.69, 150 needed.  
+* SPAwards(Landingrate)) | Pilot (ID: 1) has 0 fpm, between -155 to -145 fpm needed.  
+* SPAwards(Airline)) | Pilot (ID: 1) has 4 flights with DVA, 3 needed.  
+* SPAwards(Distance)) | Pilot (ID: 1) has flown 2583.74 nm, 2500 nm needed.  
+* SPAwards(Aircraft)) | Pilot (ID: 1) has 2 flights with aircraft AT75, 2 needed.  
+* SPAwards(Streak)) | Pilot (ID: 1) streak check: FAILED  
+* SPAwards(Shorthaul)) | Pilot (ID: 1) has 1 short-haul flights < 250 nm, 10 required.  
+* SPAwards(Longhaul)) | Pilot (ID: 1) has 0 flights > 4200 nm, 10 required.  
+* SPAwards(Consecutive)) | Pilot (ID: 1) 2 active days, 5 required.  
+* SPAwards(Loyalty)) | Pilot (ID: 1) has 3 flights from/to EFHK, 2 required.  
+* SPAwards(Explorer)) | Pilot (ID: 1) has 3 flights in region EF, 2 required.  
+* SPAwards(Fleet)) | Pilot (ID: 1) has flown 3 unique aircraft types, 2 required.  
+* SPAwards(Performer)) | Pilot (ID: 1) average score: 89.0000,  80 required.  
+* SPAwards(Networkelite)) | VATSIM: 17781.6 minutes for Pilot (ID: 1).  
+* SPAwards(Networkelite)) | IVAO: 875.1 minutes for Pilot (ID: 1).  
+* SPAwards(Networkelite)) | Pilot (ID: 1) total combined minutes: 18656.7, required: 3000.  
+* SPAwards(Nightler)) | Pilot (ID: 1) has 0 night landings, 3 required.  
+* SPAwards(Cargo)) | Pilot (ID: 1) carried 786 cargo units with DVA/AT75, 500000 required.  
+* SPAwards(Passenger)) | Pilot (ID: 1) carried 110 pax with DVA/A319, 100 required.  
+* SPAwards(Weekend)) | Pilot (ID: 1) has 0 weekend flights, 5 required.  
+* SPAwards(Discord)) | Pilot (ID: 1) 000000000000000 verified successfully with required role 000000000000000.  
+* SPAwards(Earlybird)) | Pilot (ID: 1) has 0 early flights, 5 required.  
+* SPAwards(Fuelburner)) | Pilot (ID: 1) has no flights exceeding 50000 kg fuel used. 
 
 ## Note:
 
@@ -128,3 +128,4 @@ Please use the GitHub [issue](https://github.com/PaintSplasher/phpvms7_SPAwards/
 15.OCTOBER.25
 
 * Initial Release
+
