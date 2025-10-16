@@ -34,7 +34,7 @@ class SPAwardsDiscord extends Award
 
         // Retrieve pilot's Discord ID from the custom field
         $discordFieldId = optional(
-            UserField::select('id')->where('name', 'Discord ID')->first()
+            UserField::select('id')->where('name', $config['customfields']['discord_id_field'])->first()
         )->id;
 
         if (!$discordFieldId) {

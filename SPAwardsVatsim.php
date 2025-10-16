@@ -24,7 +24,7 @@ class SPAwardsVatsim extends Award
 
         // Retrieve the UserField ID for "VATSIM ID"
         $vatsim_field_id = optional(
-            UserField::select('id')->where('name', 'VATSIM ID')->first()
+            UserField::select('id')->where('name', $config['customfields']['vatsim_id_field'])->first()
         )->id;
 
         // If the VATSIM field is missing, stop execution

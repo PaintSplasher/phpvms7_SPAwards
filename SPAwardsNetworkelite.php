@@ -28,7 +28,7 @@ class SPAwardsNetworkelite extends Award
         // VATSIM TIME FETCH
         try {
             $vatsimFieldId = optional(
-                UserField::select('id')->where('name', 'VATSIM ID')->first()
+                UserField::select('id')->where('name', $config['customfields']['vatsim_id_field'])->first()
             )->id;
 
             if ($vatsimFieldId) {
@@ -56,7 +56,7 @@ class SPAwardsNetworkelite extends Award
         // IVAO TIME FETCH
         try {
             $ivaoFieldId = optional(
-                UserField::select('id')->where('name', 'IVAO ID')->first()
+                UserField::select('id')->where('name', $config['customfields']['ivao_id_field'])->first()
             )->id;
 
             if ($ivaoFieldId) {

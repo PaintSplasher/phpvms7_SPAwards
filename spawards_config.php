@@ -28,4 +28,16 @@ return [
         'api_key' => 'YOUR_IVAO_API_KEY_HERE',
     ],
 
+    // CUSTOM FIELD NAME SETTINGS:
+    'customfields' => [
+        // VATSIM ID
+        'vatsim_id_field' => 'YOUR_VATSIM_ID_FIELD_NAME_HERE',
+    ],
+        // IVAO ID
+        'ivao_id_field' => 'YOUR_IVAO_ID_FIELD_NAME_HERE',
+    ],
+        // DISCORD ID
+        'discord_id_field' => 'YOUR_DISCORD_ID_FIELD_NAME_HERE',
+    ],
+
 ];

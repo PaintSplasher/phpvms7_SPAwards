@@ -23,7 +23,7 @@ class SPAwardsIvao extends Award
 
         // Retrieve the UserField ID for "IVAO ID"
         $ivao_field_id = optional(
-            UserField::select('id')->where('name', 'IVAO ID')->first()
+            UserField::select('id')->where('name', $config['customfields']['ivao_id_field'])->first()
         )->id;
 
         // If the IVAO field doesn't exist, stop here

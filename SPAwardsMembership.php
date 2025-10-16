@@ -30,7 +30,7 @@ class SPAwardsMembership extends Award
         $membershipDays = $this->user->created_at->diffInDays(Carbon::today());
 
         // Log for debugging
-        Log::info("SPAwards(Distance) | Pilot (ID: {$this->user->id}) has {$membershipDays} days, {$days} days needed.");
+        Log::info("SPAwards(Membership) | Pilot (ID: {$this->user->id}) has {$membershipDays} days, {$days} days needed.");
 
         // Check if the membership duration meets or exceeds the required threshold
         return $membershipDays >= $days;
