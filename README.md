@@ -125,7 +125,12 @@ Please use the GitHub [issue](https://github.com/PaintSplasher/phpvms7_SPAwards/
 
 ## Release / Update Notes
 
+16.OCTOBER.25
+
+* Name correction and extended configuration
+
 15.OCTOBER.25
 
 * Initial Release
+
 
