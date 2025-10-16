@@ -4,6 +4,7 @@
 * Upload all other SPAwards files to modules/Awards/Awards
 * Every Award does an entry in your laravel log for debugging
 * Some awards, such as Discord or Ivao, require API credentials to be set in: modules/Awards/spawards_config.php
+* If you update my awards just overwrite all files, but check the spawards_config.php for any changes
 
 ## Below is a list of all available award modules included in SPAwards. Each award can be configured individually through the phpVMS admin panel with specific parameters (for example: distance, time, count, or thresholds).
 
@@ -127,8 +128,10 @@ Please use the GitHub [issue](https://github.com/PaintSplasher/phpvms7_SPAwards/
 
 16.OCTOBER.25
 
-* Name correction in a few awards
-* Added configuration and API issues fixed
+* Updated spawards_config and README
+* Name for debugging in some awards fixed
+* Added configuration options
+* Added checks if the award is already granted
 
 15.OCTOBER.25
 
