@@ -127,7 +127,8 @@ Please use the GitHub [issue](https://github.com/PaintSplasher/phpvms7_SPAwards/
 
 16.OCTOBER.25
 
-* Name correction and extended configuration
+* Name correction in a few awards
+* Added configuration and API issues fixed
 
 15.OCTOBER.25
 

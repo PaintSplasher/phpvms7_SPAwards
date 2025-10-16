@@ -16,6 +16,8 @@ return [
     // DISCORD SETTINGS:
     'discord' => [
         // Your Discord server Guild ID | Right-click on your Discord server, copy Server-ID
+        // Remember, you need the Discord bot on your server to check your joined user/pilots:
+        // https://discord.com/api/oauth2/authorize?client_id=YOUR_CLIENT_ID&permissions=268435456&scope=bot%20applications.commands
         'guild_id' => 'YOUR_DISCORD_GUILD_ID',
 
         // Your Discord Bot Token | https://discord.com/developers/applications
