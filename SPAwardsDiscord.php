@@ -3,6 +3,7 @@
 namespace Modules\Awards\Awards;
 
 use App\Contracts\Award;
+use App\Models\UserAward;
 use App\Models\UserField;
 use App\Models\UserFieldValue;
 use Illuminate\Support\Facades\Http;
@@ -11,10 +12,36 @@ use Illuminate\Support\Facades\Log;
 class SPAwardsDiscord extends Award
 {
     public $name = 'SPAwards(Discord)';
+
     public $param_description = 'Award given to pilots verified as members of the VA Discord server (Optional: Enter Role-ID a Pilot needs to be verified)';
 
     public function check($requiredRole = null): bool
     {
+        // Ensure parameter is provided and valid
+        if (is_null($requiredRole)) {
+            Log::error('SPAwards(Discord) | No parameter set.');
+            return false;
+        }
+        
+        // Check if the award is already granted
+        $award = \App\Models\Award::where('ref_model', get_class($this))
+            ->where('ref_model_params', (string) $requiredRole)
+            ->first();
+
+        if (!$award) {
+            Log::error("SPAwards(Discord) | No matching award found.");
+            return false;
+        }
+
+        $alreadyGranted = UserAward::where('user_id', $this->user->id)
+            ->where('award_id', $award->id)
+            ->exists();
+
+        if ($alreadyGranted) {
+            Log::info("SPAwards(Discord) | Award already granted to Pilot (ID: {$this->user->id}). Skipping...");
+            return false;
+        }
+        
         // Load configuration
         $configPath = base_path('modules/Awards/spawards_config.php');
         if (!file_exists($configPath)) {

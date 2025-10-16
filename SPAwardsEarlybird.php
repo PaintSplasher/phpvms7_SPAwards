@@ -3,6 +3,7 @@
 namespace Modules\Awards\Awards;
 
 use App\Contracts\Award;
+use App\Models\UserAward;
 use App\Models\Enums\PirepState;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
@@ -15,9 +16,28 @@ class SPAwardsEarlybird extends Award
 
     public function check($requiredFlights = null): bool
     {
-        // Validate parameter
+        // Ensure parameter is provided and valid
         if (is_null($requiredFlights) || !is_numeric($requiredFlights)) {
             Log::error('SPAwards(Earlybird) | Invalid or missing requiredFlights parameter.');
+            return false;
+        }
+
+        // Check if the award is already granted
+        $award = \App\Models\Award::where('ref_model', get_class($this))
+            ->where('ref_model_params', (string) $requiredFlights)
+            ->first();
+
+        if (!$award) {
+            Log::error("SPAwards(Earlybird) | No matching award found.");
+            return false;
+        }
+
+        $alreadyGranted = UserAward::where('user_id', $this->user->id)
+            ->where('award_id', $award->id)
+            ->exists();
+
+        if ($alreadyGranted) {
+            Log::info("SPAwards(Earlybird) | Award already granted to Pilot (ID: {$this->user->id}). Skipping...");
             return false;
         }
 

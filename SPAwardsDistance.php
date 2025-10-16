@@ -15,13 +15,19 @@ class SPAwardsDistance extends Award
 
     public function check($distance = null): bool
     {
+        // Ensure parameter is provided and valid
+        if (is_null($distance) || !is_numeric($distance)) {
+            Log::error('SPAwards(Distance) | Invalid or missing distance parameter.');
+            return false;
+        }
+
         // Check if the award is already granted
         $award = \App\Models\Award::where('ref_model', get_class($this))
             ->where('ref_model_params', (string) $distance)
             ->first();
 
         if (!$award) {
-            Log::error("SPAwards(Distance) | No matching award found in DB for ref_model=".get_class($this)." and params='{$distance}'.");
+            Log::error("SPAwards(Distance) | No matching award found.");
             return false;
         }
 
@@ -31,12 +37,6 @@ class SPAwardsDistance extends Award
 
         if ($alreadyGranted) {
             Log::info("SPAwards(Distance) | Award already granted to Pilot (ID: {$this->user->id}). Skipping...");
-            return false;
-        }
-
-        // Ensure parameter is provided and valid
-        if (is_null($distance) || !is_numeric($distance)) {
-            Log::error('SPAwards(Distance) | Invalid or missing distance parameter.');
             return false;
         }
 

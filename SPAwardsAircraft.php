@@ -3,6 +3,7 @@
 namespace Modules\Awards\Awards;
 
 use App\Contracts\Award;
+use App\Models\UserAward;
 use App\Models\Enums\PirepState;
 use Illuminate\Support\Facades\Log;
 
@@ -13,10 +14,29 @@ class SPAwardsAircraft extends Award
     public $param_description = 'The ICAO code of the aircraft and the number of flights flown to give this award, e.g. "A321:25"';
 
     public function check($icaoFlights = null): bool
-    {
+    {       
         // Ensure parameter is provided and valid
         if (is_null($icaoFlights)) {
             Log::error('SPAwards(Aircraft) | No parameter set.');
+            return false;
+        }
+
+        // Check if the award is already granted
+        $award = \App\Models\Award::where('ref_model', get_class($this))
+            ->where('ref_model_params', (string) $icaoFlights)
+            ->first();
+
+        if (!$award) {
+            Log::error("SPAwards(Aircraft) | No matching award found.");
+            return false;
+        }
+
+        $alreadyGranted = UserAward::where('user_id', $this->user->id)
+            ->where('award_id', $award->id)
+            ->exists();
+
+        if ($alreadyGranted) {
+            Log::info("SPAwards(Aircraft) | Award already granted to Pilot (ID: {$this->user->id}). Skipping...");
             return false;
         }
 

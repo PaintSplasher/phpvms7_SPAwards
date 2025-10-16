@@ -3,6 +3,7 @@
 namespace Modules\Awards\Awards;
 
 use App\Contracts\Award;
+use App\Models\UserAward;
 use Illuminate\Support\Facades\Log;
 
 class SPAwardsRoutecode extends Award
@@ -16,6 +17,25 @@ class SPAwardsRoutecode extends Award
         // Ensure a valid route code parameter is provided
         if (is_null($routecode)) {
             Log::error('SPAwards(RouteCode) | No parameter set.');
+            return false;
+        }
+
+        // Check if the award is already granted
+        $award = \App\Models\Award::where('ref_model', get_class($this))
+            ->where('ref_model_params', (string) $routecode)
+            ->first();
+
+        if (!$award) {
+            Log::error("SPAwards(RouteCode) | No matching award found.");
+            return false;
+        }
+
+        $alreadyGranted = UserAward::where('user_id', $this->user->id)
+            ->where('award_id', $award->id)
+            ->exists();
+
+        if ($alreadyGranted) {
+            Log::info("SPAwards(RouteCode) | Award already granted to Pilot (ID: {$this->user->id}). Skipping...");
             return false;
         }
 

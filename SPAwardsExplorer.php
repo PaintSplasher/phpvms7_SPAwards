@@ -3,6 +3,7 @@
 namespace Modules\Awards\Awards;
 
 use App\Contracts\Award;
+use App\Models\UserAward;
 use App\Models\Enums\PirepState;
 use Illuminate\Support\Facades\Log;
 
@@ -17,6 +18,25 @@ class SPAwardsExplorer extends Award
         // Ensure parameter is provided
         if (is_null($regionFlights)) {
             Log::error('SPAwards(Explorer) | No parameter set.');
+            return false;
+        }
+
+        // Check if the award is already granted
+        $award = \App\Models\Award::where('ref_model', get_class($this))
+            ->where('ref_model_params', (string) $regionFlights)
+            ->first();
+
+        if (!$award) {
+            Log::error("SPAwards(Explorer) | No matching award found.");
+            return false;
+        }
+
+        $alreadyGranted = UserAward::where('user_id', $this->user->id)
+            ->where('award_id', $award->id)
+            ->exists();
+
+        if ($alreadyGranted) {
+            Log::info("SPAwards(Explorer) | Award already granted to Pilot (ID: {$this->user->id}). Skipping...");
             return false;
         }
 

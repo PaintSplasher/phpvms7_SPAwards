@@ -3,6 +3,7 @@
 namespace Modules\Awards\Awards;
 
 use App\Contracts\Award;
+use App\Models\UserAward;
 use App\Models\Enums\PirepState;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
@@ -18,6 +19,25 @@ class SPAwardsWeekend extends Award
         // Ensure parameter is valid
         if (is_null($requiredCount) || !is_numeric($requiredCount)) {
             Log::error('SPAwards(Weekend) | Invalid or missing parameter.');
+            return false;
+        }
+
+        // Check if the award is already granted
+        $award = \App\Models\Award::where('ref_model', get_class($this))
+            ->where('ref_model_params', (string) $requiredCount)
+            ->first();
+
+        if (!$award) {
+            Log::error("SPAwards(Weekend) | No matching award found.");
+            return false;
+        }
+
+        $alreadyGranted = UserAward::where('user_id', $this->user->id)
+            ->where('award_id', $award->id)
+            ->exists();
+
+        if ($alreadyGranted) {
+            Log::info("SPAwards(Weekend) | Award already granted to Pilot (ID: {$this->user->id}). Skipping...");
             return false;
         }
 

@@ -3,6 +3,7 @@
 namespace Modules\Awards\Awards;
 
 use App\Contracts\Award;
+use App\Models\UserAward;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 
@@ -17,6 +18,25 @@ class SPAwardsMembership extends Award
         // Ensure that the number of days parameter is provided
         if (is_null($days)) {
             Log::error('SPAwards(Membership) | No parameter set.');
+            return false;
+        }
+
+        // Check if the award is already granted
+        $award = \App\Models\Award::where('ref_model', get_class($this))
+            ->where('ref_model_params', (string) $days)
+            ->first();
+
+        if (!$award) {
+            Log::error("SPAwards(Membership) | No matching award found.");
+            return false;
+        }
+
+        $alreadyGranted = UserAward::where('user_id', $this->user->id)
+            ->where('award_id', $award->id)
+            ->exists();
+
+        if ($alreadyGranted) {
+            Log::info("SPAwards(Membership) | Award already granted to Pilot (ID: {$this->user->id}). Skipping...");
             return false;
         }
 

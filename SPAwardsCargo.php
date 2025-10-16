@@ -3,12 +3,14 @@
 namespace Modules\Awards\Awards;
 
 use App\Contracts\Award;
+use App\Models\UserAward;
 use App\Models\Enums\PirepState;
 use Illuminate\Support\Facades\Log;
 
 class SPAwardsCargo extends Award
 {
     public $name = 'SPAwards(Cargo)';
+
     public $param_description = 'The airline ICAO, aircraft ICAO, and total cargo count required, e.g. "GEC:B744:500000".';
 
     public function check($params = null): bool
@@ -16,6 +18,25 @@ class SPAwardsCargo extends Award
         // Ensure parameter is provided and valid
         if (is_null($params)) {
             Log::error('SPAwards(Cargo) | No parameter set.');
+            return false;
+        }
+
+        // Check if the award is already granted
+        $award = \App\Models\Award::where('ref_model', get_class($this))
+            ->where('ref_model_params', (string) $params)
+            ->first();
+
+        if (!$award) {
+            Log::error("SPAwards(Cargo) | No matching award found.");
+            return false;
+        }
+
+        $alreadyGranted = UserAward::where('user_id', $this->user->id)
+            ->where('award_id', $award->id)
+            ->exists();
+
+        if ($alreadyGranted) {
+            Log::info("SPAwards(Cargo) | Award already granted to Pilot (ID: {$this->user->id}). Skipping...");
             return false;
         }
 

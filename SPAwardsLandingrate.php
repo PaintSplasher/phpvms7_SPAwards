@@ -3,6 +3,7 @@
 namespace Modules\Awards\Awards;
 
 use App\Contracts\Award;
+use App\Models\UserAward;
 use App\Models\Enums\PirepState;
 use Illuminate\Support\Facades\Log;
 
@@ -17,6 +18,25 @@ class SPAwardsLandingrate extends Award
         // Ensure that a valid parameter is provided
         if (is_null($lrate)) {
             Log::error('SPAwards(Landingrate) | No parameter set.');
+            return false;
+        }
+
+        // Check if the award is already granted
+        $award = \App\Models\Award::where('ref_model', get_class($this))
+            ->where('ref_model_params', (string) $lrate)
+            ->first();
+
+        if (!$award) {
+            Log::error("SPAwards(Landingrate) | No matching award found.");
+            return false;
+        }
+
+        $alreadyGranted = UserAward::where('user_id', $this->user->id)
+            ->where('award_id', $award->id)
+            ->exists();
+
+        if ($alreadyGranted) {
+            Log::info("SPAwards(Landingrate) | Award already granted to Pilot (ID: {$this->user->id}). Skipping...");
             return false;
         }
 
