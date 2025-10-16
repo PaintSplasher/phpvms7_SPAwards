@@ -16,6 +16,23 @@ class SPAwardsNetworkelite extends Award
 
     public function check($totalMinutes = null): bool
     {
+        // Load configuration
+        $configPath = base_path('modules/Awards/spawards_config.php');
+        if (!file_exists($configPath)) {
+            Log::error('SPAwards(Networkelite) | Missing configuration file: modules/Awards/spawards_config.php');
+            return false;
+        }
+
+        $config = include $configPath;
+
+        $ivaoId  = $config['customfields']['ivao_id_field'] ?? null;
+        $vatsimId  = $config['customfields']['vatsim_id_field'] ?? null;
+
+        if (empty($ivaoId) || empty($vatsimId)) {
+            Log::error('SPAwards(Networkelite) | Missing Networkelite configuration (VATSIM ID or IVAO ID).');
+            return false;
+        }
+        
         // Ensure parameter is provided and valid
         if (is_null($totalMinutes) || !is_numeric($totalMinutes)) {
             Log::error('SPAwards(Networkelite) | Invalid or missing parameter.');
@@ -67,7 +84,7 @@ class SPAwardsNetworkelite extends Award
                 if (!empty($ivaoId)) {
                     $response = Http::withHeaders([
                         'accept' => 'application/json',
-                        'apiKey' => 'AMQ2OSZXZLG92KBMXGUAV30H1UVEJJKY',
+                        'apiKey' => $config['ivao']['api_key'],
                     ])->get("https://api.ivao.aero/v2/users/{$ivaoId}");
 
                     if ($response->ok()) {

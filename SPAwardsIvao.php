@@ -11,10 +11,27 @@ use Illuminate\Support\Facades\Log;
 class SPAwardsIvao extends Award
 {
     public $name = 'SPAwards(IVAO)';
+    
     public $param_description = 'Amount of flight time in minutes at which to give this award';
 
     public function check($flight_minutes = null): bool
     {
+        // Load configuration
+        $configPath = base_path('modules/Awards/spawards_config.php');
+        if (!file_exists($configPath)) {
+            Log::error('SPAwards(IVAO) | Missing configuration file: modules/Awards/spawards_config.php');
+            return false;
+        }
+
+        $config = include $configPath;
+
+        $ivaoId  = $config['customfields']['ivao_id_field'] ?? null;
+
+        if (empty($ivaoId)) {
+            Log::error('SPAwards(IVAO) | Missing IVAO configuration (IVAO ID).');
+            return false;
+        }
+
         // Ensure the flight_minutes parameter is provided and numeric
         if (is_null($flight_minutes) || !is_numeric($flight_minutes)) {
             Log::error('SPAwards(IVAO) | Invalid or missing flight_minutes parameter.');

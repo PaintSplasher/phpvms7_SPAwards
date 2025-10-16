@@ -5,8 +5,8 @@ namespace Modules\Awards\Awards;
 use App\Contracts\Award;
 use App\Models\UserField;
 use App\Models\UserFieldValue;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class SPAwardsVatsim extends Award
 {
@@ -16,6 +16,22 @@ class SPAwardsVatsim extends Award
 
     public function check($flight_minutes = null): bool
     {
+        // Load configuration
+        $configPath = base_path('modules/Awards/spawards_config.php');
+        if (!file_exists($configPath)) {
+            Log::error('SPAwards(VATSIM) | Missing configuration file: modules/Awards/spawards_config.php');
+            return false;
+        }
+
+        $config = include $configPath;
+
+        $vatsimId  = $config['customfields']['vatsim_id_field'] ?? null;
+
+        if (empty($vatsimId)) {
+            Log::error('SPAwards(VATSIM) | Missing VATSIM configuration (VATSIM ID).');
+            return false;
+        }
+        
         // Ensure the flight_minutes parameter is provided and valid
         if (is_null($flight_minutes) || !is_numeric($flight_minutes)) {
             Log::error('SPAwards(VATSIM) | Invalid or missing flight_minutes parameter.');
