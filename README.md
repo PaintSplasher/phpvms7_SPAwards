@@ -126,6 +126,10 @@ Please use the GitHub [issue](https://github.com/PaintSplasher/phpvms7_SPAwards/
 
 ## Release / Update Notes
 
+01.NOVEMBER.25
+
+* SPAwardsPerformer: Award gets now removed if the score drops.
+
 16.OCTOBER.25
 
 * Updated spawards_config and README
