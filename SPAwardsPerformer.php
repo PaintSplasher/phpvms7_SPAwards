@@ -35,11 +35,6 @@ class SPAwardsPerformer extends Award
             ->where('award_id', $award->id)
             ->exists();
 
-        if ($alreadyGranted) {
-            Log::info("SPAwards(Performer) | Award already granted to Pilot (ID: {$this->user->id}). Skipping...");
-            return false;
-        }
-
         $minScore = (float) $minScore;
 
         // Retrieve average score from accepted PIREPs
@@ -50,13 +45,37 @@ class SPAwardsPerformer extends Award
         // Handle pilots without any accepted PIREPs
         if (is_null($avgScore)) {
             Log::info("SPAwards(Performer) | Pilot (ID: {$this->user->id}) has no accepted flights yet.");
+
+            // If they previously had it, remove it
+            if ($alreadyGranted) {
+                $this->user->awards()->detach($award->id);
+                Log::info("SPAwards(Performer) | Award removed from Pilot (ID: {$this->user->id}) due to missing PIREPs.");
+            }
+
             return false;
         }
 
         // Log for debugging
         Log::info("SPAwards(Performer) | Pilot (ID: {$this->user->id}) average score: {$avgScore},  {$minScore} required.");
 
-        // Return true if the pilot's average meets or exceeds requirement
-        return $avgScore >= $minScore;
+        // Grant award if meets requirement
+        if ($avgScore >= $minScore) {
+            if (!$alreadyGranted) {
+                $this->user->awards()->attach($award->id);
+                Log::info("SPAwards(Performer) | Award granted to Pilot (ID: {$this->user->id}).");
+                return true;
+            }
+
+            Log::info("SPAwards(Performer) | Award already granted to Pilot (ID: {$this->user->id}). Skipping...");
+            return false;
+        }
+
+        // If falls below requirement, remove award if granted
+        if ($alreadyGranted) {
+            $this->user->awards()->detach($award->id);
+            Log::info("SPAwards(Performer) | Award removed from Pilot (ID: {$this->user->id}) due to score drop.");
+        }
+
+        return false;
     }
 }
